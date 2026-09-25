@@ -59,6 +59,7 @@ app.get("/listing/:id/show", async (req, res) => {
   res.render("show.ejs", { data });
 });
 
+//*
 // app.get("/sampleListing",async (req,res)=>{
 //     let sampleData = new Listing({
 //         title:"home sweet home",
