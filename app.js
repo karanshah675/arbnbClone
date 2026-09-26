@@ -3,6 +3,9 @@ const mongoose = require("mongoose");
 const app = express();
 const path = require("path");
 const Listing = require("./models/listing");
+const methodOverride = require("method-override");
+
+app.use(methodOverride("_method"));
 mongoose
   .connect("mongodb://127.0.0.1:27017/airBnb")
   .then((res) => {
@@ -42,7 +45,7 @@ app.post("/listing", (req, res) => {
     .save()
     .then(() => {
       console.log("data saved");
-      res.redirect("index.ejs")
+      res.redirect("index.ejs");
     })
     .catch((err) => {
       console.log(err);
@@ -59,8 +62,46 @@ app.get("/listing/:id/show", async (req, res) => {
   res.render("show.ejs", { data });
 });
 
-//*
-// app.get("/sampleListing",async (req,res)=>{
+//*edit route
+app.get("/listing/:id/edit", async (req, res) => {
+  let { id } = req.params;
+  let data = await Listing.findById(id);
+  res.render("edit.ejs", { data });
+});
+//*put route
+app.put("/listing/:id", (req, res) => {
+  let { id } = req.params;
+  let { title, discription, price, location, country } = req.body;
+  Listing.findByIdAndUpdate(id, {
+    title: title,
+    discription: discription,
+    price: price,
+    location: location,
+    country: country,
+  })
+    .then((res2) => {
+      console.log("data updated");
+      res.redirect("/listing");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+//*delete route
+app.delete("/listing/:id", (req, res) => {
+  let { id } = req.params;
+  Listing.findByIdAndDelete(id)
+    .then((res2) => {
+      console.log("data deleted");
+      res.redirect("/listing");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+// app.get("/sampleListing",agit push -u origin mainsync (req,res)=>{
 //     let sampleData = new Listing({
 //         title:"home sweet home",
 //         description:"beach view",

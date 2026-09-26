@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>edit</title>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body>
+    <form action="/listing/<%= data._id %>?_method=PUT" method="post">
+      <input type="text" name="title" placeholder="<%= data.title %>" />
+      <br />
+      <textarea
+        name="description"
+        id=""
+        placeholder="<%= data.description %>"
+      ></textarea>
+      <br />
+      <input type="number" name="price" placeholder="<%= data.price %>" />
+      <br />
+      <input type="text" name="location" placeholder="<%= data.location %>" />
+      <br />
+      <input type="text" name="country" placeholder="<%= data.country %>" />
+      <br />
+      <button>edit list</button>
+    </form>
+  </body>
 </html>

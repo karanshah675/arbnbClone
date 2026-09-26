@@ -17,6 +17,9 @@
         <li><form action="/listing/<%= data.id %>/edit" method="get">
             <button>Edit list</button>
         </form></li>
+        <li><form action="/listing/<%= data._id %>?_method=DELETE" method="post">
+            <button>Delete list</button>
+        </form></li>
     </ul>
 </body>
 </html>
